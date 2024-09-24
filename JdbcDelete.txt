@@ -1,0 +1,24 @@
+package third;
+import java.sql.*;
+public class JdbcDelete {
+
+	public static void main(String[] args) throws SQLException {
+     String url="jdbc:mysql://localhost:3306/jdbc";
+     String username="root";
+     String password="archu";
+     int id=6;
+     String query="delete from passenger where id= ?";
+     Connection con=DriverManager.getConnection(url,username,password);
+     //Statement st=con.createStatement();
+     PreparedStatement pst=con.prepareStatement(query);
+     pst.setInt(1, id);
+     //int delete =st.executeUpdate(query);
+     int delete=pst.executeUpdate();
+     System.out.println("number of rows deleted: "+delete);
+     con.close();
+	}
+
+}
+
+output:
+number of rows deleted: 1
