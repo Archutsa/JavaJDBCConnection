@@ -1,0 +1,32 @@
+package third;
+import java.sql.*;
+public class JdbcInsert {
+
+	public static void main(String[] args) throws SQLException {
+	 String url="jdbc:mysql://localhost:3306/jdbc";
+	 String username="root";
+	 String password="archu";
+	 int id=8;
+	 String name="riya";
+	 String address="madurai";
+	// String query="insert into passenger values(7,'sham','madurai')";
+	 String query="insert into passenger values(?,?,?)";
+	 Connection con=DriverManager.getConnection(url,username,password);
+	// Statement st=con.createStatement();
+	 PreparedStatement pst=con.prepareStatement(query);
+	 pst.setInt(1,id);
+	 pst.setString(2, name);
+	 pst.setString(3,address);
+	 //int rows=st.executeUpdate(query);
+	 int rows=pst.executeUpdate();
+	 System.out.println("number of rows updated: "+rows);
+	 con.close();
+	 
+
+	}
+
+}
+
+output:
+
+number of rows updated: 1
