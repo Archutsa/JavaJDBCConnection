@@ -1,0 +1,44 @@
+package fourth;
+import java.sql.*;
+public class Jdbclike {
+
+	public static void main(String[] args) throws SQLException {
+		String url="jdbc:mysql://localhost:3306/jdbcwork";
+		String username="root";
+		String password="archu";
+		String query="select * from employee where address like 'c%'";
+                String query2="select * from employee where address like '%a'";
+		Connection con=DriverManager.getConnection(url,username,password);
+		Statement st=con.createStatement();
+		ResultSet rs=st.executeQuery(query);
+		while(rs.next()) {
+		System.out.println("id "+rs.getInt(1));
+		System.out.println("name "+rs.getString(2));
+		System.out.println("Address "+rs.getString(3));
+                System.out.println("----------------------------------");
+		ResultSet rs2=st.executeQuery(query2);
+
+		while(rs2.next()) {
+			System.out.println("id "+rs2.getInt(1));
+			System.out.println("name "+rs2.getString(2));
+			System.out.println("Address "+rs2.getString(3));
+			}
+		}
+
+		con.close();
+	}
+
+}
+
+output:
+
+id 3
+name shalu
+Address chennai
+id 5
+name shalu
+Address chennai
+----------------------------------
+id 4
+name ravi
+Address kolkata
